@@ -13,8 +13,9 @@ module Capistrano
 
           def service(service_name, *roles)
             Diplomat.configure do |config|
-              config.url = fetch(:consul_url)
-              # TODO: pass through ssl opts
+              config.url = fetch(:consul_url, "http://localhost:8500")
+              config.adapter = :net_http_persistent
+              config.options = fetch(:ssl_options, {})
             end
 
             @nodes = Diplomat::Service.get(service_name, :all)

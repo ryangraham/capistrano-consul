@@ -17,6 +17,12 @@ And then execute:
 ```ruby
     # config/deploy/<development|stage|prod>.rb
     set :consul_url, 'http://192.168.22.30:8500'
+
+    set :ssl_options, { ssl: {
+                          client_cert:  OpenSSL::X509::Certificate.new(File.read('./cert.pem')),
+                          client_key: OpenSSL::PKey::RSA.new(File.read('./key.pem'), '')
+                        }
+                      }
 ```
 
 ```ruby
@@ -26,11 +32,6 @@ And then execute:
     # Give "cache" role to hosts publishing memcached service
     service 'memcached', :cache
 ```
-
-## TODO
-- Support SRV for finding consul servers
-- Support SSL opts (client certs, etc)
-- Try using KV data
 
 ## Contributing
 

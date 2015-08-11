@@ -12,5 +12,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   s.files         = `git ls-files`.split("\n") 
 
-  s.add_runtime_dependency "diplomat"
+  s.add_runtime_dependency 'diplomat'
+  s.add_runtime_dependency 'net-http-persistent'
 end
